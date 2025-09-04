@@ -40,7 +40,7 @@ jobs:
           sudo tar -xf $source_file
           cd $source_dir
           test -f .config || sudo make oldconfig
-          sudo make ARCH=arm32 CROSS_COMPILE=aarch64-linux-gnu- prepare V=0
+          sudo make ARCH=arm CROSS_COMPILE=aarch64-linux-gnu- prepare V=0
           ls -al /usr/src/$source_dir
         shell: bash
       - uses: actions/checkout@v4
@@ -87,7 +87,7 @@ jobs:
         run: |
           make clean
           make env
-          CROSS_ARCH=arm32 make -f builder/Makefile.release release SNAPSHOT_VERSION=${{ github.ref_name }}
+          CROSS_ARCH=arm make -f builder/Makefile.release release SNAPSHOT_VERSION=${{ github.ref_name }}
       - name: Publish
         run: |
           make -f builder/Makefile.release publish SNAPSHOT_VERSION=${{ github.ref_name }}
